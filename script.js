@@ -55,52 +55,10 @@ console.log(pooja);
 const amandeep = new Person('Amandeep', 'jangra', 1988);
 console.log(amandeep);
 
-/* Now remember from one of the previous lectures,that in classical object oriented programming,
-an object created from a class is called an instance,right? Now we didn't technically create a class here
-because as we discussed before,JavaScript doesn't really have classes
-in the sense of traditional OOP.However, we did create an object
-from a constructor function.And actually three objects, right?
-And constructor functions have been used since the beginning of JavaScript
-to kind of simulate classes.And so therefore we can still say
-that devender here is an instance of person and the same goes for pooja and for amandeep here.
-And in fact there is even an operator that we can use to test for that.
-So that works like this.So devender is an instance of, and then person.
-And so this will then return either true or false.Now, if we created something else here,
-let's say J, just like this, then if we do this,this would of course be false, right?
-Because of course we didn't create this variable here,so this object using any constructor function, all right?
-And since we're talking about instances here,we can also say that these properties here
-will be the instance properties. */
-
 console.log(devender instanceof Person); // true
 
 const Jay = 'Jay';
 console.log(Jay instanceof Person); // false
-
-/* a really bad practice.So you should never do this.
-You should never create a method inside of a constructor function.
-That's because imagine we were gonna create a hundred
-or thousands or even tens of thousands of person objects using this constructor function.
-Then what would happen,
-is that each of these objects would carry around this function here.
-So if we had a thousand objects,we would essentially create a thousand copies
-of this function. And so that would be terrible for the performance of our code.
-Again, don't do this.But instead to solve this problem,
-we are gonna use prototypes and prototype inheritance
-just like we discussed in the last video.All right, great.
-So this is the basics of constructor functions. */
-
-/* Just note that function constructors are not really a feature of 
-the JavaScript language.
-Instead, they are simply a pattern that has been developed by other developers.
-And now everyone simply uses this.And this now includes you as a new developer. */
-
-/* But now we're gonna talk about prototypes.So actually, we talked about prototypes,
-prototypal inheritance and delegation earlier already.But how does all of that actually work?
-Well, it can be summarized like this.So, first each and every function in JavaScript
-automatically has a property called prototype.And that includes, of course, constructor functions.
-Now every object that's created by a certain constructor function
-will get access to all the methods and properties that we define on the constructors
- prototype property. */
 
 //➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 /* 206. Prototypes */
@@ -113,37 +71,14 @@ devender.calAge(); // 32
 pooja.calAge(); // 29
 amandeep.calAge(); // 33
 console.log(devender);
-/* Person {firstName: "Devender", LastName: "Kumar", birthYear: 1989} */
 
-/* if we check our devender here,then you see that it contains of course
-the birth year and the first name,but it does not contain the calcAge method.
-But still, we have access to it because of prototypal inheritance.Okay. */
-
-/* so this is the prototype of Jonas.It's not the prototype property
-but it is simply the prototype, okay?And so here again, we see the calcAge function
-and that's why Jonas is able to use this.So to prototype of the Jonas object
-is essentially the prototype propertyof the constructor function. */
 console.log(devender.__proto__);
 /* {calAge: ƒ, constructor: ƒ}
 calAge: ƒ ()
 constructor: ƒ (firstName, LastName, birthYear)
 [[Prototype]]: Object */
+console.log(devender.__proto__.__proto__);
 console.log(devender.__proto__ === Person.prototype); // true
-
-/* But what I just said sounded incredibly confusing, didn't it?
-So shouldn't person dot prototype be the prototype of person,I mean
-should this prototype property here not be the prototype of person?
-Well, actually, no.So this is the confusing part.so person dot prototype here
-is actually not the prototype of person.But instead, it is what's gonna be used
-as the prototype of all the objects that are created with the person constructor function.
-So that's a subtle but important difference that you need to keep in mind.
-And, in fact, what I just said that is confirmed by this comparison that we just did here.
-So we just saw that devender's prototype which is this, is the prototype property
-of the person constructor function.And there are actually other built in methods
-that we can use to prove this.So on any object,for example, object dot prototype,
-we can test if this is a prototype of another object.So we can call is prototype,
-so is prototype like this of and then Jonas.And so this should also become true.
-And indeed it is. */
 
 console.log(Person.prototype.isPrototypeOf(devender)); // true
 console.log(Person.prototype.isPrototypeOf(pooja)); // true
@@ -199,36 +134,8 @@ at: ƒ at()
 concat: ƒ concat()
 constructor: ƒ Array()
 copyWithin: ƒ copyWithin()
-entries: ƒ entries()
-every: ƒ every()
-fill: ƒ fill()
-filter: ƒ filter()
-find: ƒ find()
-findIndex: ƒ findIndex()
-flat: ƒ flat()
-flatMap: ƒ flatMap()
-forEach: ƒ forEach()
-includes: ƒ includes()
-indexOf: ƒ indexOf()
-join: ƒ join()
-keys: ƒ keys()
-lastIndexOf: ƒ lastIndexOf()
-length: 0
-map: ƒ map()
-pop: ƒ pop()
-push: ƒ push()
-reduce: ƒ reduce()
-reduceRight: ƒ reduceRight()
-reverse: ƒ reverse()
-shift: ƒ shift()
-slice: ƒ slice()
-some: ƒ some()
-sort: ƒ sort()
-splice: ƒ splice()
-toLocaleString: ƒ toLocaleString()
-toString: ƒ toString()
-unshift: ƒ unshift()
-values: ƒ values()
+...
+...
 Symbol(Symbol.iterator): ƒ values()
 Symbol(Symbol.unscopables): {copyWithin: true, entries: true, fill: true, find: true, findIndex: true, …}
 [[Prototype]]: Object */
@@ -255,15 +162,7 @@ console.log(arr.__proto__.__proto__.__proto__); // null
 console.log(arr.__proto__ === Array.prototype); // true
 console.log(arr);
 /* (9) [3, 4, 3, 5, 6, 8, 2, 1, 3]
-0: 3
-1: 4
-2: 3
-3: 5
-4: 6
-5: 8
-6: 2
-7: 1
-8: 3
+
 length: 9
 [[Prototype]]: Array(0) */
 /*  here is also in the end array has its prototype which has access to all methods that include 
@@ -388,19 +287,15 @@ console.log(Car.prototype);
 
 // class declearation
 class PersonClass {
-  //➖➖➖➖➖➖➖➖➖
   constructor(firstName, birthYear) {
     // add a constructor method
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
-
-  // method decleration
-  //➖➖➖➖➖➖➖➖➖
+  //➖➖➖➖➖➖
   calAge() {
     console.log(2021 - this.birthYear);
   }
-  //➖➖➖➖➖➖➖➖➖
   greet() {
     console.log(`Hello ${this.firstName}`);
   }
@@ -410,6 +305,9 @@ const jessica = new PersonClass('Jessica', 1989); // object formation
 console.log(jessica);
 jessica.calAge(); //32
 console.log(jessica.__proto__ === PersonClass.prototype); // true
+console.log(PersonClass.prototype); // true
+console.log(jessica.__proto__); // true
+console.log(jessica.__proto__); // true
 
 /* PersonClass.prototype.greet = function () {
   console.log(`Hello ${this.firstName}`);
@@ -427,28 +325,6 @@ jessica.greet(); // hello jessica
      constructor: class PersonClass
 [[Prototype]]: Object*/
 
-/* 🌟 Now, what's important to understand here is that all of these
-   methods that we write in the class,so outside of the constructor,
-   will be on the prototype of the objects and not on the objects themselves.  
-   So this is really just like before prototypal inheritance. */
-
-/* 🌟 So first, classes are not hoisted.So first, let's scroll a bit here.
-Classes are not hoisted,and so even if they are class declarations.
-So function declarations, remember are hoisted,which means we can use them
-before they are declared in the code.But with classes, that doesn't work. */
-
-/* 🌟 Second, just like functions,classes are also first class citizens.
-First class citizens,and so what that means, is that we can pass them
-into functions and also return them from functions.And as I mentioned before,
-that is because classes are really just a special kind of function behind the scenes. */
-
-/* 🌟 third, the body of a class is always executed in strict mode.
-Classes are executed in strict mode.And so even if we didn't activate it for our
- entire script,all the code that is in the class will be executed in strict mode. */
-
-/* 🌟 Now, if you're asking, if you should use classes without understanding prototypal 
- inheritance,well then, the reply is definitely no */
-
 //♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦
 /* 211. Setters and Getters */
 /* 🌟 So getters and setters are basically functions that get and set a value so
@@ -458,10 +334,10 @@ Classes are executed in strict mode.And so even if we didn't activate it for our
 const account = {
   owner: 'jonas',
   movements: [200, 530, 236, 1000],
+
   get latest() {
     return this.movements.slice(-1).pop();
   },
-
   set latest(mov) {
     // one argument must be decleared
     this.movements.push(mov);
@@ -473,3 +349,259 @@ apply some condition  */
 
 // account.latest(50); but we have apply like propertey of a object
 account.latest = 50;
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    // add a constructor method
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  calAge() {
+    console.log(2021 - this.birthYear);
+  }
+  greet() {
+    console.log(`Hello ${this.firstName}`);
+  }
+
+  get age() {
+    return 2021 - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else console.log(`${name} Not a full name`);
+  }
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+const object01 = new PersonCl('jessica', 1988);
+console.log(object01);
+console.log(object01.__proto__);
+/* PersonCl {firstName: "jessica", birthYear: 1988}
+         birthYear: 1988
+         firstName: "jessica"
+         age: (...)
+[[Prototype]]: Object
+         age: (...)
+         calAge: ƒ calAge()
+         constructor: class PersonCl
+         greet: ƒ greet()
+         get age: ƒ age()
+[[Prototype]]: Object */
+object01.calAge(); // 33
+console.log(object01.age); // 33
+console.log(object01.fullName); // undefined
+// to clear this we have to set getter method
+
+/* Let's now talk about a feature
+that is actually common to all objects in JavaScript,
+and that's getters and setters.
+So every object in JavaScript
+can have setter and getter properties.
+And we call these special properties assessor properties,
+while the more normal properties are called data properties.
+So getters and setters are basically functions
+that get and set a value so just as the name says,
+but on the outside they still look like regular properties.
+And so let's first take a look at getters and setters
+in a simple object literal,
+and for that I'm gonna use the bank account example
+from the Bankist application.
+So very simple object literal here.
+The owner is Jonas.
+Then some simple movements.
+So the values here don't really matter, okay?
+Oh, and of course I'm writing this object all wrong.
+Maybe you have already been noticing that.
+Okay, but now it should be correct.
+All right, but now to add a getter to this object.
+We can start by basically writing a normal method.
+So let's say that we want a method
+to get the latest movement and so let's call it latest.
+And then to transform this into a getter
+we simply prepend the keyword get.
+All right, and so let's simply return the last movement here
+so that's this.movements.slice -1.
+But this is actually gonna return an array,
+so an array with the last position
+and so we can simply take that out using the pop method.
+And we could've used destructuring as well,
+but I didn't want to save this
+into an external variable first.
+And so now we can use this getter like this.
+So account and then we say latest,
+but we simply use it as a property.
+All right, so we don't call the method,
+but instead we write it as if it was just a property.
+So let's see, and indeed that returns 300.
+So this can be very useful
+when we want to read something as a property,
+but still need to do some calculations before.
+Okay, and now we can do the same also as a setter.
+So we say set, latest again
+and then here we can basically add a new movement
+to the array.
+And any setter method needs to have exactly one parameter.
+So in this case that's simply a movement.
+So let's say this.movements.push
+and then that movement that we just passed into.
+Now it is not mandatory to specify a setter
+when we have a getter for the same property.
+Okay, so just a getter or just a setter would be enough.
+And so, how do we use the setter now?
+So if it was a regular method then we would have to do this.
+So account.latest and then call it with the movement,
+
+let's say 50.
+But now this is actually like a property and not a method.
+And so we can simply set it
+just like we set any other property.
+So we essentially set it equal to 50.
+And so now if we take a look at the movements here,
+it will then give us the complete array
+with the 50 there at the end.
+And so in a nutshell this is how getters and setters work
+for any regular object in JavaScript.
+Now however, classes do also have getters and setters,
+and they do indeed work in the exact same way.
+And so let's try them out now here in our person class.
+So here we can for example add a getter
+for the age property.
+So we can say get age and then we return the age.
+So this is of course very similar to the calcAge method
+that we already have here but that doesn't matter
+because this is really just a demonstration example.
+All right, and so like this we will be able
+to basically read the age of any object using a property.
+So let's try that here for example, jessica.age,
+and this time we actually need to log it to the console.
+And you see here we now get the same value.
+All right, so you see that the getter is indeed
+just like any other regular method
+that we set on the prototype.
+And in fact we can also check that out here.
+So if we take a look at the prototype of Jessica,
+it will be right there.
+Now it has these dots here
+because it's only calculated once we actually click this.
+Okay?
+So here too it already looks as if it would be a property
+and not a method.
+We still have the get method down here,
+but then it's also kind of ended as a property.
+All right?
+So that's a very simple use case of a getter,
+but setters and getters can actually be very useful
+for data validation and as an example,
+let's try some validation with the name.
+So for that I will actually change a firstName here
+to fullName.
+And so now here we expect a full name.
+So a name which basically contains a space.
+So let's say Jessica Davis here,
+and so now we can create a setter for the fullName property
+which will check if this is actually a full name.
+All right, so set fullName,
+and then we need the name itself,
+and then here we need some logic.
+So to test if it contains a space,
+if the name includes a space,
+and I'm not sure if it is called includes actually.
+Now let me just test it here very quick.
+Okay, we have to comment out this part.
+All right, so this method actually does exist.
+So I wasn't sure if it only exists on erase,
+but indeed it also exists on strings.
+And so in this case then we actually want to set
+this.fullName to the name that was received.
+But if not, we want to give an alert.
+So the given name is not a full name.
+So in this case what's really important to understand
+is that we are creating a setter for a property name
+that does already exist.
+So fullName is already a property
+that are trying to set here,
+but then we also have the setter.
+And so now what's gonna happen is
+that each time this code here is executed,
+so whenever we set the fullName on the this keyword,
+then actually this method here,
+so this setter is gonna be executed.
+And so that name that we pass in as fullName
+will then become this name.
+All right, let's check that out actually.
+And so now as we create Jessica here,
+you will see and indeed it, we saw Jessica Davis here,
+but now we got this crazy error here
+of maximum call stack size exceeded.
+Now that's a very cryptic error message,
+but what happens here is that there is a conflict.
+So right now both the setter function
+and this constructor function
+are trying to set the exact same property name.
+And so that gives origin to this weird error.
+So what we need to do instead
+is to here create a new property name.
+And the convention for doing that,
+so when we have a setter which is trying to set a property
+that does already exist,
+then here as a convention we add an underscore.
+So again, this is just a convention,
+it's not a JavaScript feature.
+So it's really just a different variable name
+to avoid that naming conflict.
+However, now when we do this,
+we are actually creating a new variable,
+so a fullName variable.
+So let's try this now actually.
+So if we try to look at Jessica Davis you see that right now
+the property that exists is underscore fullName.
+And so right now we cannot do jessica.fullName
+because that simply doesn't exist.
+And so to fix this we now also need to create a getter
+for the fullName property.
+And so that will simply return the underscore fullName.
+So let's see.
+So return this._fullName.
+And so if we try to do the same now,
+then you see that we are back to having this fullName here.
+All right?
+And of course, the actual property that is here
+is now still underscore fullName,
+because well that's what we do here in the setter, right?
+But then we can also compute this full name
+just as we can compute the age.
+So this pattern here is important to understand
+whenever we try to set a property that already exists.
+Now let's try another name here just to see what happens,
+and actually after all this.
+So let's create a Walter object here.
+New PersonCl, that's right.
+And now we're just using a name with one word,
+let's say 1965 and so now we get this error.
+So Walter is not a full name,
+and so right now if we check out Walter,
+age probably doesn't have any name, and yeah it doesn't.
+So just the birth year now.
+But if we then put it as a full name,
+so Walter White then indeed, Walter like this,
+then we get the underscore fullName.
+But just like before we can then also access walter.fullName
+because of that setter or actually of that getter
+that we just defined earlier.
+Now okay, great, so this is another nice feature of classes
+that can be very useful sometimes.
+Now we don't need to use getters or setters,
+and many people actually don't,
+but yeah, as I just said sometimes it's just nice
+to be able to use these features
+and especially when we need like a validation like this
+by the time we are creating a new object.
+So that's essentially what this setter here does.
+Next up,
+we're gonna take a look at yet another feature of classes,
+which is static methods.
+So let's check that out right now.
+
+ */
