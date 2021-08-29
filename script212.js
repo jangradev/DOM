@@ -64,27 +64,36 @@ const staticFn = new PersonSclass(' static Function', 1989);
 
 PersonSclass.hey(); // Hello this is static Function
 
-/* this hey function not available in PersonSclass prototype */
+/* class PersonSclass {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // instense methods
+  calAge() {
+    console.log(2021 - this.birthYea… */
+
 console.log(PersonSclass.prototype);
 
+/* also this hey function not available in PersonSclass prototype */
 /* {constructor: ƒ, calAge: ƒ, greet: ƒ}
-calAge: ƒ calAge()
-constructor: class PersonSclass
-greet: ƒ greet()
+        calAge: ƒ calAge()
+        constructor: class PersonSclass
+        greet: ƒ greet()
 [[Prototype]]: Object
-constructor: ƒ Object()
-hasOwnProperty: ƒ hasOwnProperty()
-isPrototypeOf: ƒ isPrototypeOf()
-propertyIsEnumerable: ƒ propertyIsEnumerable()
-toLocaleString: ƒ toLocaleString()
-toString: ƒ toString()
-valueOf: ƒ valueOf()
-__defineGetter__: ƒ __defineGetter__()
-__defineSetter__: ƒ __defineSetter__()
-__lookupGetter__: ƒ __lookupGetter__()
-__lookupSetter__: ƒ __lookupSetter__()
-get __proto__: ƒ __proto__()
-set __proto__: ƒ __proto__() */
+        constructor: ƒ Object()
+        hasOwnProperty: ƒ hasOwnProperty()
+        isPrototypeOf: ƒ isPrototypeOf()
+        propertyIsEnumerable: ƒ propertyIsEnumerable()
+        toLocaleString: ƒ toLocaleString()
+        toString: ƒ toString()
+        valueOf: ƒ valueOf()
+        __defineGetter__: ƒ __defineGetter__()
+        __defineSetter__: ƒ __defineSetter__()
+        __lookupGetter__: ƒ __lookupGetter__()
+        __lookupSetter__: ƒ __lookupSetter__()
+        get __proto__: ƒ __proto__()
+        set __proto__: ƒ __proto__() */
 
 console.log(staticFn);
 /* PersonSclass {firstName: " static Function", birthYear: 1989}
